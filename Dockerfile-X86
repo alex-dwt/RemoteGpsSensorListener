@@ -1,0 +1,15 @@
+# This file is part of the RemoteGpsSensorListener package.
+# (c) Alexander Lukashevich <aleksandr.dwt@gmail.com>
+# For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
+
+FROM ubuntu
+MAINTAINER Alexander Lukashevich <aleksandr.dwt@gmail.com>
+
+RUN apt-get update && apt-get install -y --no-install-recommends nodejs npm gpsd gpsd-clients
+RUN ln -s /usr/bin/nodejs /usr/bin/node
+
+WORKDIR /srv
+COPY ./server/* /srv/
+RUN npm install
+
+CMD ["npm","start"]
