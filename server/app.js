@@ -8,8 +8,10 @@
 
 import express from 'express';
 import HttpException from './http_exception'
+import Gps from './gps'
 
 let app = express();
+let gps = new Gps();
 
 app.use(function(req, res, next) {
 	res.header('Access-Control-Allow-Origin', '*');
@@ -26,9 +28,10 @@ app.use(function(req, res, next) {
 /**
  * Get
  */
-app.get('/gps', (req, res, next) => {
-	res.status(200).send();
-});
+app.get(
+	'/gps',
+	(req, res, next) => 	res.status(200).json(gps)
+);
 
 /**
  * Errors handlers
