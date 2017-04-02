@@ -11,8 +11,11 @@ RUN cd /tmp && mkdir _node && \
     tar xvf node.tar.xz  -C _node && cp -r _node/$(ls _node/)/* /usr/local/ && \
     rm -f node.tar.xz && rm -rf _node
 
+RUN mkdir /srv
+COPY ./server/package.json /srv/
 WORKDIR /srv
-COPY ./server/* /srv/
 RUN npm install
+
+COPY ./server/* /srv/
 
 CMD ["npm","start"]
